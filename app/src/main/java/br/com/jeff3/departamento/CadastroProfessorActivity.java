@@ -80,6 +80,10 @@ public class CadastroProfessorActivity extends ActionBarActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_cadastro, menu);
+
+        if(professor.getId() != 0)
+            menu.getItem(2).setVisible(true);
+
         return true;
     }
 
