@@ -17,7 +17,9 @@ import br.com.jeff3.departamento.app.MensageBox;
 import br.com.jeff3.departamento.app.ViewHelper;
 import br.com.jeff3.departamento.database.DataBase;
 import br.com.jeff3.departamento.dominio.RepositorioDepartamento;
+import br.com.jeff3.departamento.dominio.RepositorioProfessor;
 import br.com.jeff3.departamento.modelo.Departamento;
+import br.com.jeff3.departamento.modelo.Professor;
 
 
 public class CadastroProfessorActivity extends ActionBarActivity {
@@ -30,6 +32,8 @@ public class CadastroProfessorActivity extends ActionBarActivity {
     private DataBase dataBase;
     private SQLiteDatabase connection;
     private RepositorioDepartamento rpDepartamento;
+    private Professor professor;
+    private RepositorioProfessor rpProfessor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +44,20 @@ public class CadastroProfessorActivity extends ActionBarActivity {
         edtDisciplina = (EditText)findViewById(R.id.edtDisciplina);
         spnDepProf = (Spinner)findViewById(R.id.spnDepartamentoProfessor);
 
+        Bundle bundle = getIntent().getExtras();
+
+        //verifica se recuperou e o parametro eh departmento
+        if((bundle != null) && (bundle.containsKey(ProfessorActivity.PAR_PROFESSOR))){
+            professor = (Professor)bundle.getSerializable(ProfessorActivity.PAR_PROFESSOR);
+            preencheDados();
+
+        }else  professor = new Professor();
+
         try{
             dataBase = new DataBase(this);
             connection = dataBase.getReadableDatabase();
             rpDepartamento =  new RepositorioDepartamento(connection);
+            rpProfessor = new RepositorioProfessor(connection);
 
             adpDepProf = ViewHelper.createArrayAdapter(this, spnDepProf);
 
@@ -54,22 +68,9 @@ public class CadastroProfessorActivity extends ActionBarActivity {
 
         depList = rpDepartamento.buscaListaDepartamentos(this);
 
-        Cursor cursor = connection.query(Departamento.TABELA, null, null, null, null, null, null);
-
-        cursor.moveToFirst();
-
-        if(cursor.getCount() > 0){
-            do{
-
-                Departamento departamento = new Departamento();
-
-                departamento.setId(cursor.getLong(cursor.getColumnIndex(departamento.ID)));
-                departamento.setNome(cursor.getString(cursor.getColumnIndex(departamento.NOME)));
-                departamento.setSigla(cursor.getString(cursor.getColumnIndex(departamento.SIGLA)));
-
-                adpDepProf.add(departamento.getSigla());
-
-            }while (cursor.moveToNext());
+        for(int i = 0; i < depList.size(); i++){
+            Departamento dep = depList.get(i);
+            adpDepProf.add(dep.getSigla());
         }
 
 
@@ -84,16 +85,67 @@ public class CadastroProfessorActivity extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_salvar) {
-            return true;
+        switch (item.getItemId()){
+            case R.id.action_salvar:
+                salvar();
+
+                finish();
+                break;
+            case R.id.action_cancelar:
+
+                finish();
+                break;
+            case R.id.action_excluir:
+                excluir();
+
+                finish();
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void preencheDados(){
+        edtNome.setText(professor.getNome());
+        edtDisciplina.setText(professor.getDisciplina());
+
+
+    }
+
+    public void salvar(){
+        try{
+            Departamento dep = depList.get(spnDepProf.getSelectedItemPosition());
+
+            professor.setNome(edtNome.getText().toString());
+            professor.setDisciplina(edtDisciplina.getText().toString());
+            professor.setDepartamento(dep.getSigla());
+
+
+            if(professor.getId() == 0) {
+                rpProfessor.inserir(professor);
+            }else{
+                rpProfessor.alterar(professor);
+            }
+        }catch (Exception ex){
+            MensageBox.show(this, "Erro ao inserir contato: " +ex.getMessage(), "ERRO!");
+        }
+    }
+
+    public void excluir(){
+        try{
+            rpProfessor.excluir(professor.getId());
+        }catch (Exception ex){
+            MensageBox.show(this, "Erro ao excluir contato: " +ex.getMessage(), "ERRO!");
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(connection != null){
+            connection.close();
+        }
     }
 }

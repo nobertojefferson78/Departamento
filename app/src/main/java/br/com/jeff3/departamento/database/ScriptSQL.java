@@ -21,11 +21,11 @@ public class ScriptSQL {
     public static String getCreateProfessor(){
         StringBuilder sqlBuilder = new StringBuilder();
 
-        sqlBuilder.append("CREATE TABLE IF NOT EXISTS DEPARTAMENTO (");
+        sqlBuilder.append("CREATE TABLE IF NOT EXISTS PROFESSOR (");
         sqlBuilder.append("_id INTEGER       NOT NULL");
         sqlBuilder.append("      PRIMARY KEY AUTOINCREMENT,");
         sqlBuilder.append("NOME               VARCHAR (255),");
-        sqlBuilder.append("CURSO             VARCHAR (255),");
+        sqlBuilder.append("DISCIPLINA             VARCHAR (255),");
         sqlBuilder.append("DEPARTAMENTO      VARCHAR(10)");
         sqlBuilder.append(");");
 

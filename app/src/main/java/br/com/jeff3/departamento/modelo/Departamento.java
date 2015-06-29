@@ -8,6 +8,7 @@ import java.io.Serializable;
 public class Departamento implements Serializable{
     public static String ID = "_id";
     public static String TABELA = "DEPARTAMENTO";
+
     public static String NOME = "NOME";
     public static String SIGLA = "SIGLA";
 

@@ -15,14 +15,15 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/edtPesquisa"
+            android:id="@+id/edtPesquisaProfessor"
             android:layout_weight="1" />
 
         <ImageButton
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:id="@+id/btiCadastarProfessor"
-            android:background="@drawable/abc_ic_go_search_api_mtrl_alpha" />
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:id="@+id/btiCadastrarProfessor"
+            android:src="@drawable/abc_ic_go_search_api_mtrl_alpha" />
+
     </LinearLayout>
 
     <ListView

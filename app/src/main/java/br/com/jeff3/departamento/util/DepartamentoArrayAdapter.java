@@ -12,7 +12,7 @@ import br.com.jeff3.departamento.modelo.Departamento;
 
 /**
  * Created by jefferson on 25/06/2015.
- * extendendendo do ArrayAdapter é obrigatoriamente necessario criar um construtor para ele
+ * extendendendo do ArrayAdapter eh obrigatoriamente necessario criar um construtor para ele
  */
 public class DepartamentoArrayAdapter extends ArrayAdapter<Departamento>{
 
@@ -20,7 +20,7 @@ public class DepartamentoArrayAdapter extends ArrayAdapter<Departamento>{
     private int resource = 0;
     //armazenar a interface
     private LayoutInflater inflater;
-    //usado para recuperar informações da pasta recurso
+    //usado para recuperar informacoes da pasta recurso
     private Context context;
     /**
      *
@@ -78,7 +78,7 @@ public class DepartamentoArrayAdapter extends ArrayAdapter<Departamento>{
         return view;
     }
 
-    //USADA PARA OTIMIZAR A CONEXÃO COM A INTERFACE E NAO FICAR CHAMANDO O METODO TODA HORA
+    //USADA PARA OTIMIZAR A CONEXAO COM A INTERFACE E NAO FICAR CHAMANDO O METODO TODA HORA
     static class ViewHolder
     {
         TextView txtNome, txtSigla;

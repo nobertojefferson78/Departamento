@@ -47,7 +47,7 @@ public class ProfessorArrayAdapter extends ArrayAdapter<Professor>{
 
 
         viewHolder.txtNome.setText(professor.getNome());
-        viewHolder.txtSigla.setText(professor.getDepartamento().getSigla());
+        viewHolder.txtSigla.setText(professor.getDepartamento());
         return view;
     }
 

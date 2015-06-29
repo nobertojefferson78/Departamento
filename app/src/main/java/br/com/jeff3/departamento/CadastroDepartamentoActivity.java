@@ -79,16 +79,16 @@ public class CadastroDepartamentoActivity extends ActionBarActivity implements V
         switch (item.getItemId()){
             case R.id.action_salvar:
                 salvar();
-                conection.close();
+
                 finish();
                 break;
             case R.id.action_cancelar:
-                conection.close();
+
                 finish();
                 break;
             case R.id.action_excluir:
                 excluir();
-                conection.close();
+
                 finish();
                 break;
         }
@@ -130,5 +130,13 @@ public class CadastroDepartamentoActivity extends ActionBarActivity implements V
         edtNome.setText(this.departamento.getNome());
         edtSigla.setText(this.departamento.getSigla());
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(conection != null){
+            conection.close();
+        }
     }
 }
