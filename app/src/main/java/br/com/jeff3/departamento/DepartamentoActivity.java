@@ -1,12 +1,16 @@
 package br.com.jeff3.departamento;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Parcelable;
+import android.os.Build;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,8 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
-
-import java.io.Serializable;
+import android.widget.SearchView;
 
 import br.com.jeff3.departamento.app.MensageBox;
 import br.com.jeff3.departamento.database.DataBase;
@@ -37,6 +40,8 @@ public class DepartamentoActivity extends ActionBarActivity implements View.OnCl
     private DataBase dataBase;
     private SQLiteDatabase conection;
     private RepositorioDepartamento rpDepartamento;
+
+    private FiltraDados filtraDados;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,9 +80,19 @@ public class DepartamentoActivity extends ActionBarActivity implements View.OnCl
 
     }
 
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
+        SearchView sv = new SearchView(this);
+
+        filtraDados = new FiltraDados(adpDepartamento);
+
+        MenuItem m1 = menu.add(0, 0, 0, "Item 1");
+        m1.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+        m1.setActionView(sv);
+
+
         getMenuInflater().inflate(R.menu.menu_departamento, menu);
         return true;
     }
@@ -125,5 +140,52 @@ public class DepartamentoActivity extends ActionBarActivity implements View.OnCl
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         adpDepartamento = rpDepartamento.buscaDepartamentos(this);
         lstDepartamento.setAdapter(adpDepartamento);
+    }
+
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    private class FiltroDados implements SearchView.OnQueryTextListener {
+
+        @Override
+        public boolean onQueryTextSubmit(String query) {
+            Log.i("Sricpt", "onQueryTextSubmit -> " + query);
+            return false;
+        }
+
+        @Override
+        public boolean onQueryTextChange(String newText) {
+            Log.i("Sricpt", "onQueryTextChange -> " + newText);
+            return false;
+        }
+    }
+
+    private class FiltraDados implements TextWatcher {
+
+        //cria-se um arrayAdapter do tipo que eh usado na interface
+        private ArrayAdapter<Departamento> arrayAdapter;
+
+        //inicializa com o construtor recebendo  o parametro do array que utilizou
+        private FiltraDados(ArrayAdapter<Departamento> arrayAdapter){
+            this.arrayAdapter = arrayAdapter;
+        }
+
+        public void setArrayAdapter(ArrayAdapter<Departamento> arrayAdapter){
+            this.arrayAdapter = arrayAdapter;
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        //metodo usado para pesquisar de acordo com o texto digitado
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            arrayAdapter.getFilter().filter(s);
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
     }
 }

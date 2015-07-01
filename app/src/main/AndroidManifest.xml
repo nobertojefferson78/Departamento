@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AgendaActivity"
+            android:name=".CadastroAgendaActivity"
             android:label="@string/title_activity_agendar" >
         </activity>
         <activity
@@ -35,6 +35,14 @@
         <activity
             android:name=".CadastroDepartamentoActivity"
             android:label="@string/title_activity_cadastro_departamento" >
+        </activity>
+        <activity
+            android:name=".AgendaActivity"
+            android:label="@string/title_activity_agenda" >
+        </activity>
+        <activity
+            android:name=".ListaAgendaActivity"
+            android:label="@string/title_activity_lista_agenda" >
         </activity>
     </application>
 

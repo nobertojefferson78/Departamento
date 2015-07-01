@@ -2,7 +2,6 @@ package br.com.jeff3.departamento;
 
 import android.content.Intent;
 import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,7 +11,6 @@ import android.view.*;
 
 import br.com.jeff3.departamento.app.MensageBox;
 import br.com.jeff3.departamento.database.DataBase;
-import br.com.jeff3.departamento.dominio.RepositorioDepartamento;
 
 
 public class MainActivity extends ActionBarActivity implements View.OnClickListener{

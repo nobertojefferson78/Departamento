@@ -35,14 +35,16 @@ public class ScriptSQL {
     public static String getCreateAgenda(){
         StringBuilder sqlBuilder = new StringBuilder();
 
-        sqlBuilder.append("CREATE TABLE IF NOT EXISTS DEPARTAMENTO (");
+        sqlBuilder.append("CREATE TABLE IF NOT EXISTS AGENDA (");
         sqlBuilder.append("_id INTEGER       NOT NULL");
         sqlBuilder.append("      PRIMARY KEY AUTOINCREMENT,");
         sqlBuilder.append("DEPARTAMENTO               VARCHAR (255),");
         sqlBuilder.append("PROFESSOR             VARCHAR (255),");
         sqlBuilder.append("DATA                 DATE,");
-        sqlBuilder.append("RECURSO              VARCHAR(255),");
-        sqlBuilder.append("HORARIO              VARCHAR(5)");
+        sqlBuilder.append("RECURSO              VARCHAR(50),");
+        sqlBuilder.append("HORARIO              VARCHAR(5),");
+        sqlBuilder.append("TURNO                VARCHAR(50),");
+        sqlBuilder.append("OBSERVACOES          VARCHAR(255)");
         sqlBuilder.append(");");
 
         return sqlBuilder.toString();

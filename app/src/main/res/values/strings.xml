@@ -12,7 +12,7 @@
     <string name="lbl_btn_sair">Sair</string>
     <string name="lbl_btn_departamento">Departamento</string>
     <string name="lbl_btn_professor">Professor</string>
-    <string name="lbl_btn_agenda">Agenda</string>
+    <string name="lbl_btn_agenda">Agendar</string>
     <string name="lbl_txt_departamento">Departamento:</string>
     <string name="lbl_txt_data">Data:</string>
     <string name="lbl_txt_12Horario">1/2</string>
@@ -33,4 +33,18 @@
     <string name="title_activity_cadastro_departamento">CadastroDepartamentoActivity</string>
     <string name="lbl_txt_sigla">Sigla:</string>
     <string name="lbl_menu_excluir">Excluir</string>
+    <string name="title_activity_agenda">AgendaActivity</string>
+    <string name="lbl_btn_listar_agendas">Agendas Atuais</string>
+    <string name="lbl_cbox_horario12">1/2</string>
+    <string name="lbl_cbox_horario34">3/4</string>
+    <string name="lbl_cbox_horario56">5/6</string>
+    <string name="lbl_rb_matutino">Matutino</string>
+    <string name="lbl_rb_vespertino">Vespertino</string>
+    <string name="lbl_rb_noturno">Noturno</string>
+    <string name="title_activity_lista_agenda">ListaAgendaActivity</string>
+    <string name="title_activity_captura_dados">capturaDadosActivity</string>
+
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
 </resources>
